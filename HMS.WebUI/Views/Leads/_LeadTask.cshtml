@@ -1,0 +1,29 @@
+﻿@model IEnumerable<HMS.Models.TaskModel>
+
+
+
+<div class="timeline timeline-inverse">
+    @foreach (var item in Model)
+    {
+
+        <p>
+            <div>
+                <span class="bg-danger">
+                    @Html.DisplayFor(modelItem => item.createdOn)
+                </span>
+
+                <div class="timeline-item">
+                    <div class="timeline-body">
+                        @Html.DisplayFor(modelItem => item.comments)       <i class="fas fa-user mr-1"> by</i> @Html.DisplayFor(modelItem => item.createdBy)
+                    </div>
+                </div>
+            </div>
+
+        </p>
+    }
+
+</div>
+
+
+
+

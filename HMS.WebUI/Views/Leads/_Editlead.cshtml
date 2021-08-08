@@ -1,0 +1,94 @@
+﻿@model HMS.Models.EditLeadModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div class="card">
+    @using (Html.BeginForm())
+    {
+    <div class="card-body">
+
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.leadId)
+        <div class="form-group">
+            @Html.LabelFor(model => model.CustID)<div class="col-md-12">
+                @Html.DropDownListFor(model => model.CustID, new SelectList(Model.Customerlist, "DId", "DName"), "Please Select", new { @class = "form-control select2 col-sm-12" })
+                @Html.ValidationMessageFor(model => model.CustID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description)
+            <div class="col-md-12">
+                @Html.TextAreaFor(model => model.Description, new { @class = "form-control form-control-lg col-md-12", @rows = 4 })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.PlaningOn)
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.PlaningOn, "{0:dd/MM/yyyy}", new { htmlAttributes = new { @class = "form-control col-md-12", @type = "date" } })
+                @Html.ValidationMessageFor(model => model.PlaningOn, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NoOfPersons)
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.NoOfPersons, new { htmlAttributes = new { @class = "form-control col-md-12" } })
+                @Html.ValidationMessageFor(model => model.NoOfPersons, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.statusId)
+            <div class="col-md-12">
+                @Html.DropDownListFor(model => model.statusId, new SelectList(Model.statusList, "DId", "DName"), "Please Select", new { @class = "form-control select2 form-control select2 col-md-12" })
+                @Html.ValidationMessageFor(model => model.statusId, "", new { @class = "text-danger" })
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.RatingId)
+            <div class="col-md-12">
+                @Html.DropDownListFor(model => model.RatingId, new SelectList(Model.Ratinglist, "DId", "DName"), "Please Select", new { @class = "form-control select2 col-md-12" })
+                @Html.ValidationMessageFor(model => model.RatingId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PlaingFor)
+            <div class="col-md-12">
+                @Html.DropDownListFor(model => model.PlaingFor, new SelectList(Model.Tourslist, "DId", "DName"), "Please Select", new { @class = "form-control select2 col-md-12" })
+                @Html.ValidationMessageFor(model => model.PlaingFor, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Remarks)
+            <div class="col-md-12">
+                @Html.TextAreaFor(model => model.Remarks, new { @class = "form-control form-control-lg col-md-12", @rows = 4 })
+                @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+    </div>
+            <div class="card-footer">
+
+                <button type="submit" class="btn btn-success float-right">Sign in</button>
+            </div>
+
+        
+
+    }
+</div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+
+    }
+

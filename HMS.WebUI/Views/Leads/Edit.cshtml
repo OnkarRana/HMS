@@ -1,0 +1,68 @@
+﻿@model HMS.Models.EditLeadModelDto
+
+
+
+<div class="row">
+
+    <div class="col-md-5">
+
+        @Html.Partial("_EditLead", Model.editLead)
+    </div>
+
+    <div class="col-md-7">
+        <div class="card">
+            
+            <div class="card-header p-2">
+                <ul id="tabs" class="nav nav-pills" role="tablist">
+                    <li class="nav-item"><a class="nav-link active" href="#timeline" data-toggle="tab">Activity</a></li>
+                </ul>
+            </div>
+            <div class="card-body">
+                <a href="@Url.Action("CreateLeadTask", "Leads", new { id = @Model.editLead.leadId })"
+                   class="btn btn-info" data-toggle="modal"
+                   data-target="#mdl-add" data-id="@Model.editLead.leadId">
+                    <i class="fas fa-plus" aria-hidden="true"> Add</i>
+
+                </a>
+                <div class="tab-content">
+
+                    <div class="tab-pane active" id="timeline" role="tabpanel">
+
+
+
+                        @if (Model.taskModel.Count > 0)
+                        {
+                            @Html.Partial("_LeadTask", Model.taskModel)
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="mdl-add" tabindex="-1" role="dialog" aria-labelledby="mdl-add-lbl" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+
+
+        </div>
+    </div>
+</div>
+@section scripts{
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.details').click(function (ev) {
+                ev.preventDefault();
+                var action = $(this).attr('href');
+
+                $.get(action, function (data) {
+                    $(this).find(".modal-body").html(data);
+                    $('#mdl-add').modal('show');
+                });
+            });
+        });
+
+    </script>
+}

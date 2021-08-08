@@ -1,0 +1,118 @@
+﻿@model HMS.Models.EditLeadModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+<div class="card card-warning">
+    <div class="card-header">
+        <h3 class="card-title">Lead Info</h3>
+    </div>
+
+    <div class="card-body">
+        <div class="row">
+
+            <div class="col-md-6">
+
+                @Html.HiddenFor(model => model.leadId)
+                <div class="col-md-12">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.CustID)<div class="col-md-12">
+                            @Html.DropDownListFor(model => model.CustID, new SelectList(Model.Customerlist, "DId", "DName"), "Please Select", new { @class = "form-control select2 col-sm-12" })
+                            @Html.ValidationMessageFor(model => model.CustID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.NoOfPersons)
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.NoOfPersons, new { htmlAttributes = new { @class = "form-control col-md-12" } })
+                            @Html.ValidationMessageFor(model => model.NoOfPersons, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PlaningOn)
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.PlaningOn, new { htmlAttributes = new { @class = "form-control col-md-12" } })
+                        @Html.ValidationMessageFor(model => model.PlaningOn, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.statusId)<div class="col-md-12">
+    @Html.DropDownListFor(model => model.statusId, new SelectList(Model.statusList, "DId", "DName"), "Please Select", new { @class = "form-control select2 form-control select2 col-md-12" })
+    @Html.ValidationMessageFor(model => model.statusId, "", new { @class = "text-danger" })
+</div></div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.RatingId)
+                        <div class="col-md-12">
+                            @Html.DropDownListFor(model => model.RatingId, new SelectList(Model.Ratinglist, "DId", "DName"), "Please Select", new { @class = "form-control select2 col-md-12" })
+                            @Html.ValidationMessageFor(model => model.RatingId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PlaingFor)
+                        <div class="col-md-12">
+                            @Html.DropDownListFor(model => model.PlaingFor, new SelectList(Model.Tourslist, "DId", "DName"), "Please Select", new { @class = "form-control select2 col-md-12" })
+                            @Html.ValidationMessageFor(model => model.PlaingFor, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    </div>
+
+            </div>
+           
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Description)
+                        <div class="col-md-12">
+                            @Html.TextAreaFor(model => model.Description, new { @class = "form-control form-control-lg col-md-12", @rows = 8 })
+                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                        </div></div>
+
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Remarks)
+                        <div class="col-md-12">
+                            @Html.TextAreaFor(model => model.Remarks, new { @class = "form-control form-control-lg col-md-12", @rows = 8 })
+                            @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
+                        </div></div>
+                    </div>
+            </div>
+        
+    </div>
+    <div class="card-footer">
+        
+        <button type="submit" class="btn btn-success float-right">Sign in</button>
+    </div>
+</div>
+    
+
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

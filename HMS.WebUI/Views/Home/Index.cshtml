@@ -1,0 +1,77 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">CustomerData</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <table id="example2" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>CustomerID</th>
+                                <th>Cust Name</th>
+                                <th>Email(s)</th>
+                                <th>Phone</th>
+                                <th>Address</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                   
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</div>
+<!-- /.container-fluid -->
+
+
+@section scripts{
+    <script type="text/javascript" src="~/Scripts/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="~/Scripts/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+        $('#example2').DataTable({
+            processing: true,
+            ordering: true,
+            paging: true,
+            ajax: {
+                url: "@Url.Action("getList", "Home")",
+                type: 'POST', dataType: "json", dataSrc: "Data"
+            }, "columnDefs":
+                [{
+                    "targets": [0],
+                    "visible": false,
+                    "searchable": false
+                }],
+
+            columns: [
+                { "data": "CustId", "name": "CustId", "autoWidth": true },
+                { "data": "fullname" },
+                { "data": "EmailId" },
+                { "data": "Phone" },
+                { "data": "Street" },
+                {
+                    "render": function (Data, type, full, meta) { return '<a class="btn btn-info" href="/Home/Edit/' + full.CustId + '">Edit</a>'; }
+                }
+            ]
+        });
+        $('#example2 tbody').on('click',  function () {
+            var id = $(this).closest("tr").find("td: nth - child(2)").text();
+            console.log(id);
+        });
+         });
+    </script>
+}

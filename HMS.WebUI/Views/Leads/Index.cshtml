@@ -1,0 +1,78 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Leads Data</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <table id="example2" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Customer</th>
+                                <th>Description</th>
+                                <th>PlaingFor</th>
+                                <th>Plaing On</th>
+                                <th>Status</th>
+                                <th>Rating</th>
+
+                                <th></th>
+                            </tr>
+                        </thead>
+                        
+
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</div>
+<!-- /.container-fluid -->
+
+
+@section scripts{
+    <script type="text/javascript" src="~/Scripts/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="~/Scripts/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+        $('#example2').DataTable({
+            processing: true,
+            ordering: true,
+            paging: true,
+            ajax: {
+                url: "@Url.Action("getList", "Leads")",
+                type: 'POST', dataType: "json", dataSrc: "Data"
+            }, "columnDefs":
+                [{
+                    "targets": [0],
+                    "visible": false,
+                    "searchable": false,
+                }],
+
+            columns: [
+                { "data": "leadId", "name": "leadId", "autoWidth": true },
+                { "data": "CustId" },
+                { "data": "Description" },
+                { "data": "PlaingFor" },
+                { "data": "PlaningOn", "type": 'date-dd-mmm-yyyy'},
+                { "data": "statusId" },
+                { "data": "Rating" },
+                {
+                    "render": function (Data, type, full, meta) { return '<a class="btn btn-info" href="/Leads/Edit/' + full.leadId + '">Edit</a>'; }
+                }
+            ]
+        });
+
+         });
+    </script>
+}
